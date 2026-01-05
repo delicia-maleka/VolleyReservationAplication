@@ -1,0 +1,419 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/home/reservations/{id}": {
+      "put": {
+        "tags": [
+          "reservation-controller"
+        ],
+        "description": "Update la reservation avec son id ",
+        "operationId": "updateReservation",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id_reservation",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Donnée modifier ",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateReservationDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Reservation modifier avec succès !"
+          },
+          "404": {
+            "description": "Reservation not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "reservation-controller"
+        ],
+        "description": "Delete la reservation avec son id  ",
+        "operationId": "deleteReservation",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id_reservation",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Reservation deleted"
+          },
+          "404": {
+            "description": "Reservation not found"
+          }
+        }
+      }
+    },
+    "/home/reservations": {
+      "post": {
+        "tags": [
+          "reservation-controller"
+        ],
+        "description": "nouvelle reservation",
+        "operationId": "createReservation",
+        "requestBody": {
+          "description": "reservation à crée",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateReservationDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Reservation crée"
+          },
+          "400": {
+            "description": "donnée invalide"
+          }
+        }
+      }
+    },
+    "/home": {
+      "get": {
+        "tags": [
+          "reservation-controller"
+        ],
+        "description": "Liste toute les reservations",
+        "operationId": "reservationList",
+        "responses": {
+          "200": {
+            "description": "Liste des reservations",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReservationListDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/home/reservations/user/{id}": {
+      "get": {
+        "tags": [
+          "reservation-controller"
+        ],
+        "description": "trouver les reservation d'un utilisateur par son id ",
+        "operationId": "getReservationsUtilisateur",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id_reservation",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reservation found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Reservation not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MyReservationDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/home/reservations/terrain/{idTerrain}/date/{date}": {
+      "get": {
+        "tags": [
+          "reservation-controller"
+        ],
+        "description": "trouver les crenneau disponibles au jour même",
+        "operationId": "getCreneauxDisponibles",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "description": "Date (format YYYY-MM-DD)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "idTerrain",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Liste des crenneaux disponible d'un terrain",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "time slot not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/home/reservations/detail/{id}": {
+      "get": {
+        "tags": [
+          "reservation-controller"
+        ],
+        "description": "afficher les details d'une reservation d'un utilisateur ",
+        "operationId": "getReservation",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id_utilisateur ",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reservation found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Reservation not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/home/reservations/detail/complet/{id}": {
+      "get": {
+        "tags": [
+          "reservation-controller"
+        ],
+        "operationId": "getReservationComplet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateReservationDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateReservationDTO": {
+        "type": "object",
+        "properties": {
+          "idReservation": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idUtilisateur": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idTerrain": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dateReservation": {
+            "type": "string",
+            "format": "date"
+          },
+          "heureDebut": {
+            "type": "string"
+          },
+          "heureFin": {
+            "type": "string"
+          },
+          "motif": {
+            "type": "string"
+          }
+        }
+      },
+      "ReservationListDTO": {
+        "type": "object",
+        "properties": {
+          "nomUtilisateur": {
+            "type": "string"
+          },
+          "prenomUtilisateur": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "heureDebut": {
+            "type": "string"
+          },
+          "duree": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dateDebut": {
+            "type": "string"
+          }
+        }
+      },
+      "ReservationDTO": {
+        "type": "object",
+        "properties": {
+          "idReservation": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomutilisateur": {
+            "type": "string"
+          },
+          "nomTerrain": {
+            "type": "string"
+          },
+          "dateDebut": {
+            "type": "string"
+          },
+          "duree": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "motif": {
+            "type": "string"
+          }
+        }
+      },
+      "MyReservationDTO": {
+        "type": "object",
+        "properties": {
+          "idReservation": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "date": {
+            "type": "string"
+          },
+          "terrain": {
+            "type": "string"
+          },
+          "heureDebut": {
+            "type": "string"
+          },
+          "heureFin": {
+            "type": "string"
+          },
+          "motif": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

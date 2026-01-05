@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Détail de la réservation</title>
+</head>
+<body>
+
+<h1>Détail de la réservation</h1>
+
+<table style="margin: 20px;">
+    <tbody>
+        
+        <tr>
+            <th>Terrain :</th>
+            <td th:text="${reservation.nomTerrain}"></td>
+        </tr>
+        <tr>
+            <th>Date et heure :</th>
+            <td th:text="${reservation.dateDebut}"></td>
+        </tr>
+        <tr>
+            <th>Durée (h) :</th>
+            <td th:text="${reservation.duree}"></td>
+        </tr>
+        <tr>
+            <th>Motif :</th>
+            <td th:text="${reservation.motif}"></td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="margin-top: 20px;">
+    <a th:href="@{/home/reservations/{id}/edit(id=${reservation.idReservation})}"><button type="button">Modifier</button></a>
+
+    <form th:action="@{/home/reservations/{id}/delete(id=${reservation.idReservation})}" method="post" style="display:inline;"><button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cette réservation ?');">Supprimer</button></form>
+
+    <a th:href="@{/home}"><button type="button">Retour à l'accueil</button></a>
+</div>
+
+</body>
+
+<style>
+    table {
+        border: 1px double black;
+        border-collapse: separate;
+        border-spacing: 1px;
+        width: 50%;
+    }
+
+    th, td {
+        border: 1px double black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    button {
+        margin: 10px;
+        padding: 6px 12px;
+        cursor: pointer;
+    }
+</style>
+</html>

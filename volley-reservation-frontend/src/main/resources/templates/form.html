@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Réservation</title>
+</head>
+
+<body>
+
+<h1 th:text="${edit} ? 'Modifier une réservation' : 'Nouvelle réservation'">Formulaire</h1>
+
+<form th:action="${edit} ? @{/home/reservations/{id}/edit(id=${reservation.idReservation})} : @{/home/reservations}"method="post"th:object="${reservation}">
+
+    <div th:if="${!edit}">
+        <input type="hidden" name="idUtilisateur" value="1"/>
+
+	    <h3>Choisir un créneau</h3>
+	
+	    <label>Créneau :</label>
+	    <select name="creneau" required>
+	        <option value="" disabled selected>-- Choisir un créneau --</option>
+	
+	        <optgroup label="Terrain 1">
+	            <option th:each="c : ${creneauxTerrain1}"
+	                    th:value="'1|' + ${c}"
+	                    th:text="'Terrain 1 - ' + ${c}">
+	            </option>
+	        </optgroup>
+	
+	        <optgroup label="Terrain 2">
+	            <option th:each="c : ${creneauxTerrain2}"
+	                    th:value="'2|' + ${c}"
+	                    th:text="'Terrain 2 - ' + ${c}">
+	            </option>
+	        </optgroup>
+	
+	        <optgroup label="Terrain 3">
+	            <option th:each="c : ${creneauxTerrain3}"
+	                    th:value="'3|' + ${c}"
+	                    th:text="'Terrain 3 - ' + ${c}">
+	            </option>
+	        </optgroup>
+	
+	        <optgroup label="Terrain 4">
+	            <option th:each="c : ${creneauxTerrain4}"
+	                    th:value="'4|' + ${c}"
+	                    th:text="'Terrain 4 - ' + ${c}">
+	            </option>
+	        </optgroup>
+	    </select>
+	
+	    <br><br>
+	
+	    <label>Motif :</label>
+	    <input type="text" name="motif" required/>
+	</div>
+	
+	
+	<div th:if="${edit}">
+	    <h2>Modifier une réservation</h2>
+	    
+	    <label>Date :</label>
+	    <input type="text" th:field="*{dateReservation}" readonly />
+	    
+	    <label>Heure début :</label>
+	    <input type="text" th:field="*{heureDebut}" readonly />
+	    
+	    <label>Heure fin :</label>
+	    <input type="text" th:field="*{heureFin}" readonly />
+	    
+	    <label>Motif :</label>
+	    <input type="text" th:field="*{motif}" required />
+	</div>
+
+    
+    <button type="submit"th:text="${edit} ? 'Modifier' : 'Créer'">Valider</button>
+
+    <a th:href="${edit} ? @{/home/reservations/detail/{id}(id=${reservation.idReservation})} : @{/home}"><button type="button">Annuler</button></a>
+
+</form>
+
+</body>
+
+<style>
+    table {
+        border: 1px double black;
+        border-collapse: separate;
+        border-spacing: 1px;
+    }
+
+    th, td {
+        border: 1px double black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    select, input {
+        padding: 5px;
+    }
+
+    button {
+        margin: 10px;
+        padding: 6px 12px;
+        cursor: pointer;
+    }
+</style>
+
+</html>

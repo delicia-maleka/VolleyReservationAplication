@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Accueil – Réservations</title>
+</head>
+
+<body>
+
+<h1>Liste des réservations</h1>
+<h2>Gestion des réservations du club</h2>
+
+<table style="margin: 20px">
+    <thead>
+    <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Date</th>
+        <th>Heure</th>
+        <th>Durée(h)</th>
+        
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="r : ${ReservationsListe}">
+        <td th:text="${r.prenomUtilisateur}"></td>
+        <td th:text="${r.nomUtilisateur}"></td>
+        <td th:text="${r.date}"></td>
+        <td th:text="${r.heureDebut}"></td>
+        <td th:text="${r.duree}"></td>
+
+       
+    </tr>
+    </tbody>
+</table>
+
+
+
+<h2>Mes reservation</h2>
+<table style="margin: 20px">
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Terrain</th>
+        <th>Heure début</th>
+        <th>Heure fin</th>
+        <th>Motif</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="r : ${MaReservationsListe}">
+        <td th:text="${r.date}"></td>
+        <td th:text="${r.terrain}"></td>
+        <td th:text="${r.heureDebut}"></td>
+        <td th:text="${r.heureFin}"></td>
+        <td th:text="${r.motif}"></td>
+        <td>
+            <a th:href="@{/home/reservations/detail/{id}(id=${r.idReservation})}"><button>Voir détail</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/home/reservations/new}"><button>Nouvelle réservation</button></a>
+
+</body>
+
+<style>
+    table {
+        border: 1px double black;
+        border-collapse: separate;
+        border-spacing: 1px;
+    }
+
+    th, td {
+        border: 1px double black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    button {
+        padding: 4px 8px;
+        cursor: pointer;
+    }
+</style>
+</html>
