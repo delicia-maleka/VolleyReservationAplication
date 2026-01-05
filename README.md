@@ -71,10 +71,6 @@ Relations gérées via JPA :
 
 ---
 
-## Configuration de la base de données
-
-Exemple de configuration dans `application.properties` :
-
 ## Objectif pédagogique du projet
 
 Ce projet permet de :
@@ -84,6 +80,9 @@ Ce projet permet de :
 - **Connecter une application Spring Boot à une base de données MySQL**
 - **Appliquer une architecture backend propre et maintenable**
 
+## Configuration de la base de données
+
+Exemple de configuration dans `application.properties` :
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/volley_reservation
