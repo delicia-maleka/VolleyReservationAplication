@@ -6,6 +6,15 @@ L’objectif est de gérer les **utilisateurs**, les **terrains** et les **rése
 
 ---
 
+## Objectif pédagogique du projet
+
+Ce projet permet de :
+
+- **Comprendre le fonctionnement de JPA / Hibernate**
+- **Maîtriser les relations entre entités** (`@OneToMany`, `@ManyToOne`)
+- **Connecter une application Spring Boot à une base de données MySQL**
+- **Appliquer une architecture backend propre et maintenable**
+
 ## Fonctionnalités principales
 
 ### Gestion des utilisateurs
@@ -70,15 +79,6 @@ Relations gérées via JPA :
 - Chaque réservation est liée à un utilisateur et à un terrain
 
 ---
-
-## Objectif pédagogique du projet
-
-Ce projet permet de :
-
-- **Comprendre le fonctionnement de JPA / Hibernate**
-- **Maîtriser les relations entre entités** (`@OneToMany`, `@ManyToOne`)
-- **Connecter une application Spring Boot à une base de données MySQL**
-- **Appliquer une architecture backend propre et maintenable**
 
 ## Configuration de la base de données
 
