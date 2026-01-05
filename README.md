@@ -75,6 +75,16 @@ Relations gérées via JPA :
 
 Exemple de configuration dans `application.properties` :
 
+## Objectif pédagogique du projet
+
+Ce projet permet de :
+
+- **Comprendre le fonctionnement de JPA / Hibernate**
+- **Maîtriser les relations entre entités** (`@OneToMany`, `@ManyToOne`)
+- **Connecter une application Spring Boot à une base de données MySQL**
+- **Appliquer une architecture backend propre et maintenable**
+
+
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/volley_reservation
 spring.datasource.username=root
@@ -85,11 +95,3 @@ spring.jpa.hibernate.ddl-auto=validate
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
 
-## Objectif pédagogique du projet
-
-Ce projet permet de :
-
-- **Comprendre le fonctionnement de JPA / Hibernate**
-- **Maîtriser les relations entre entités** (`@OneToMany`, `@ManyToOne`)
-- **Connecter une application Spring Boot à une base de données MySQL**
-- **Appliquer une architecture backend propre et maintenable**
